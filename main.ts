@@ -1,3 +1,29 @@
+import "./style.css";
+let teachersData = [
+  { id: "001", subjects: ["tamil", "english"], name: "sfyds" },
+  { id: "002", subjects: ["english", "math"] },
+  { id: "003", subjects: ["scie", "soci"] },
+  { id: "004", subjects: ["tamil", "soci"] },
+  { id: "005", subjects: ["english", "soci"] },
+  { id: "006", subjects: ["tamil", "soci"] },
+  { id: "007", subjects: ["english", "socil"] },
+  { id: "008", subjects: ["english", "soci"] }
+];
+
+let a = [
+  { name: "I" },
+  { name: "II" },
+  { name: "III" },
+  { name: "IV" },
+  { name: "V" },
+  { name: "VI" },
+  { name: "VII" },
+  { name: "VIII" }
+];
+
+let y = [];
+let z = [];
+
 // Teacher Class
 
 class Teacher {
@@ -97,17 +123,20 @@ sample.start();
 //divide classRoom day
 
 function daydiv(t) {
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 6; i++) {
     var rowfound = t.filter(teachers => teachers.day == i + 1);
-    z.push(rowfound);
+      for(let j=0;j<8;j++){
+        t.shift();
+      }
+    t.push(rowfound);
   }
-  y.push(z);
+  y.push(t);
 } 
 
 // divide classRooms
 
 function clsdiv(data) {
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < 8; i++) {
     var clsfound = data.filter(teachers1 => teachers1.name == a[i].name);
     daydiv(clsfound);
   }
@@ -119,7 +148,7 @@ clsdiv(sample.classRooms);
 
 const createColumn = (data) => {
   const td = document.createElement('td')
-  const text = document.createTextNode(data.teacher.hour);
+  const text = document.createTextNode(data.name);
   td.appendChild(text)
   return td;
 }
@@ -148,7 +177,6 @@ function createTable(data){
 }
 
 for(let l of y){
-  console.log(l);
   const table2 = createTable(l);
   document.getElementById('app').appendChild(table2);
 }
