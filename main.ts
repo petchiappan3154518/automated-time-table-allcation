@@ -1,3 +1,29 @@
+import "./style.css";
+let teachersData = [
+  { id: "001", subjects: ["tamil", "english"], name: "sfyds" },
+  { id: "002", subjects: ["english", "math"] },
+  { id: "003", subjects: ["scie", "soci"] },
+  { id: "004", subjects: ["tamil", "soci"] },
+  { id: "005", subjects: ["english", "soci"] },
+  { id: "006", subjects: ["tamil", "soci"] },
+  { id: "007", subjects: ["english", "socil"] },
+  { id: "008", subjects: ["english", "soci"] }
+];
+
+let a = [
+  { name: "I" },
+  { name: "II" },
+  { name: "III" },
+  { name: "IV" },
+  { name: "V" },
+  { name: "VI" },
+  { name: "VII" },
+  { name: "VIII" }
+];
+
+let y = [];
+let z = [];
+
 // Teacher Class
 
 class Teacher {
@@ -62,19 +88,15 @@ class School {
 // Assign Teacher to Class
 
   assign(x) {
-    const teacfound = this.teachers.filter(
-      teacher => teacher.day == x.day && teacher.hour == x.hour
-    );
-
-    for (let j = 0; j < 1; j++) {
-      x.teacher = teacfound[j];
+    const teacfound = this.teachers.filter(teacher => teacher.day == x.day && teacher.hour ==x.hour);
+    for(let i of teacfound) {
+      x.teacher = i;
     }
   }
 
   start() {
-    this.Shuffle();
-
     for (let x of this.classRooms) {
+      this.Shuffle();
       let s = this.assign(x);
     }
   }
@@ -97,7 +119,7 @@ sample.start();
 //divide classRoom day
 
 function daydiv(t) {
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < sample.workingDays; i++) {
     var rowfound = t.filter(teachers => teachers.day == i + 1);
       for(let j=0;j<8;j++){
         t.shift();
@@ -110,7 +132,7 @@ function daydiv(t) {
 // divide classRooms
 
 function clsdiv(data) {
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < a.length; i++) {
     var clsfound = data.filter(teachers1 => teachers1.name == a[i].name);
     daydiv(clsfound);
   }
@@ -122,7 +144,7 @@ clsdiv(sample.classRooms);
 
 const createColumn = (data) => {
   const td = document.createElement('td')
-  const text = document.createTextNode(data.name);
+  const text = document.createTextNode(data.teacher.id);
   td.appendChild(text)
   return td;
 }
@@ -150,7 +172,15 @@ function createTable(data){
   return table;
 }
 
-for(let l of y){
-  const table2 = createTable(l);
-  document.getElementById('app').appendChild(table2);
+function schooltable(data){
+  const table=document.createElement('table');
+  table.setAttribute('boder','2');
+  for(let i of y){
+    const table2 = createTable(i);
+    table.appendChild(table2);
+  }
+  return table;
 }
+
+  var table2=schooltable(y);
+  document.getElementById('app').appendChild(table2);
